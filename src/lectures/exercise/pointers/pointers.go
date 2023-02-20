@@ -18,6 +18,36 @@ package main
 
 import "fmt"
 
-func main() {
+type SecuredProduct struct {
+	name  string
+	state bool
+}
 
+func activateTag(securedProduct *SecuredProduct) {
+	securedProduct.state = true
+}
+
+func deactivateTag(securedProduct *SecuredProduct) {
+	securedProduct.state = false
+}
+
+func checkout(securedProducts *[]SecuredProduct) {
+	for _, securedProduct := range *securedProducts {
+		securedProduct.state = false
+	}
+}
+
+func main() {
+	var products []SecuredProduct
+	fmt.Println(products)
+	products = append(products, SecuredProduct{name: "Apple", state: true},
+		SecuredProduct{name: "Orange", state: true},
+		SecuredProduct{name: "Banana", state: true},
+		SecuredProduct{name: "Mango", state: false})
+	activateTag(&products[len(products)-1])
+	fmt.Println(products)
+	deactivateTag(&products[0])
+	fmt.Println(products)
+	checkout(&products)
+	fmt.Println(products)
 }

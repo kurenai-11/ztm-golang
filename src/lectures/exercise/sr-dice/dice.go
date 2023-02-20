@@ -23,7 +23,28 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 func main() {
+	times, dices, sides := 3, 2, 6
+	var sum int
+	for i := 0; i < times; i++ {
+		sum = 0
+		for k := 0; k < dices; k++ {
+			sum += rand.Intn(sides) + 1
+		}
+		fmt.Println("sum:", sum)
+		if dices == 2 && sum == 2 {
+			fmt.Println("Snake eyes!")
+		} else if sum == 7 {
+			fmt.Println("Lucky 7!")
+		} else if sum%2 == 0 {
+			fmt.Println("Even")
+		} else {
+			fmt.Println("Odd")
+		}
+	}
 }

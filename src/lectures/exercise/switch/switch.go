@@ -13,5 +13,37 @@ package main
 
 import "fmt"
 
+func isNewborn(age int) bool {
+	return age == 0
+}
+
+func isToddler(age int) bool {
+	return age >= 1 && age <= 3
+}
+
+func isChild(age int) bool {
+	return age >= 4 && age <= 12
+}
+
+func isTeenager(age int) bool {
+	return age >= 13 && age <= 17
+}
+
+func isAdult(age int) bool {
+	return age >= 18
+}
+
 func main() {
+	switch age := 122; {
+	case isNewborn(age):
+		fmt.Println("newborn")
+	case isToddler(age):
+		fmt.Println("toddler")
+	case isChild(age):
+		fmt.Println("child")
+	case isTeenager(age):
+		fmt.Println("teenager")
+	case isAdult(age):
+		fmt.Println("adult")
+	}
 }

@@ -13,5 +13,8 @@ const (
 )
 
 func main() {
-
+	switch p := price(); {
+	case p == 1:
+		fmt.Println("hey it's 1")
+	}
 }

@@ -17,8 +17,30 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+	"math/rand"
+)
+
+type Rectangle struct {
+	side int
+}
+
+func getArea(rect Rectangle) int {
+	return int(math.Pow(float64(rect.side), 2))
+}
+
+func getPerimeter(rect Rectangle) int {
+	return rect.side * 4
+}
 
 func main() {
-
+	fmt.Println(rand.Intn(5))
+	r1 := Rectangle{8}
+	fmt.Println("r1's area:", getArea(r1))
+	fmt.Println("r1's perimeter:", getPerimeter(r1))
+	r1 = Rectangle{5}
+	fmt.Println("r1's area:", getArea(r1))
+	fmt.Println("r1's perimeter:", getPerimeter(r1))
 }

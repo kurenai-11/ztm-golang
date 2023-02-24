@@ -15,10 +15,15 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Distance int32
 type Velocity float64
+type Allowed interface {
+	~int8 | ~uint32 | ~float32 | ~float64 | ~int32
+}
 
 // The `clamp` function returns a value that has been "clamped"
 // within a specific range of numbers. The `min` value is the
@@ -28,9 +33,15 @@ type Velocity float64
 // Mathematically:
 //   min <= value <= max
 
-/*
-func clamp(value, min, max) clamped_value {}
-*/
+func clamp[T Allowed](value T, min T, max T) T {
+	if value < min {
+		return min
+	}
+	if value > max {
+		return max
+	}
+	return value
+}
 
 func testClampInt8() {
 	var (

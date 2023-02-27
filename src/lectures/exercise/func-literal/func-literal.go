@@ -18,7 +18,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+)
 
 func main() {
 	lines := []string{
@@ -28,4 +31,23 @@ func main() {
 		"12 spaces,",
 		"and 4 punctuation marks in these lines of text!",
 	}
+	lettersNum, digitsNum, spacesNum, punctuationMarksNum := 0, 0, 0, 0
+	for _, line := range lines {
+		for _, r := range line {
+			if unicode.IsLetter(r) {
+				lettersNum++
+			} else if unicode.IsDigit(r) {
+				digitsNum++
+			} else if unicode.IsSpace(r) {
+				spacesNum++
+			} else if unicode.IsPunct(r) {
+				punctuationMarksNum++
+			}
+		}
+	}
+	fmt.Printf("Letters: %d\n", lettersNum)
+	fmt.Printf("Digits: %d\n", digitsNum)
+	fmt.Printf("Spaces: %d\n", spacesNum)
+	fmt.Printf("Punctuation marks: %d\n", punctuationMarksNum)
+
 }

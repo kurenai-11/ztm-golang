@@ -28,12 +28,55 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"os"
 	"strconv"
-	"time"
+	"strings"
+	"sync"
 )
+
+func validateString(s string) int {
+	if s == "" {
+		return 0
+	}
+	s = strings.TrimSpace(s)
+	number, err := strconv.Atoi(s)
+	if err != nil {
+		return 0
+	}
+	return number
+}
+
+func processFile(filename string, sums *[]int, index int, wg *sync.WaitGroup) {
+	sumsSlice := *sums
+	numbersSum := 0
+	file, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		currentNumber := scanner.Text()
+		validatedNumber := validateString(currentNumber)
+		numbersSum += validatedNumber
+	}
+	sumsSlice[index] = numbersSum
+	wg.Done()
+}
 
 func main() {
 	files := []string{"num1.txt", "num2.txt", "num3.txt", "num4.txt", "num5.txt"}
+	totalSum := 0
+	sums := make([]int, len(files))
+	wg := &sync.WaitGroup{}
+	for index, file := range files {
+		wg.Add(1)
+		go processFile(file, &sums, index, wg)
+	}
+	wg.Wait()
+	for _, sum := range sums {
+		totalSum += sum
+	}
+	fmt.Println("Sum is:", totalSum)
 }

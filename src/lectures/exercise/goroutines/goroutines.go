@@ -30,7 +30,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 	"sync"
 )
 
@@ -38,7 +37,6 @@ func validateString(s string) int {
 	if s == "" {
 		return 0
 	}
-	s = strings.TrimSpace(s)
 	number, err := strconv.Atoi(s)
 	if err != nil {
 		return 0

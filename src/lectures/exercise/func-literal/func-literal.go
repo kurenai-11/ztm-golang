@@ -49,5 +49,4 @@ func main() {
 	fmt.Printf("Digits: %d\n", digitsNum)
 	fmt.Printf("Spaces: %d\n", spacesNum)
 	fmt.Printf("Punctuation marks: %d\n", punctuationMarksNum)
-
 }
